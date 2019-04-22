@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/hankcp/nginx-upload.svg)](https://microbadger.com/images/hankcp/nginx-upload "Get your own image badge on microbadger.com")
+
 This docker image compile [nginx-upload-module](https://github.com/fdintino/nginx-upload-module) as dynamic library, and initialize upload folder structure. It also use [nginx lua module](https://github.com/openresty/lua-nginx-module#nginx-api-for-lua) to process file after uploading.
 
 ### Usage
