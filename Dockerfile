@@ -2,8 +2,8 @@ FROM ubuntu:xenial
 
 LABEL maintainer="true.cp@gmail.com" tag="nginx-upload"
 
-ENV NGINX_VERSION 1.16.1-0+xenial1
-ENV NGINX_SRC_VERSION 1.16.1
+ENV NGINX_VERSION 1.14.2-0+xenial1
+ENV NGINX_SRC_VERSION 1.14.2
 ENV UPLOAD_VERSION 2.3.0
 
 COPY nginx.upload.conf /opt/upload.conf
