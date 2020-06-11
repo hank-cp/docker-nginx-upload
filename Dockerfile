@@ -1,9 +1,9 @@
 FROM ubuntu:xenial
 
-LABEL maintainer="true.cp@gmail.com"
+LABEL maintainer="true.cp@gmail.com" tag="nginx-upload"
 
-ENV NGINX_VERSION 1.14.2-0+xenial1
-ENV NGINX_SRC_VERSION 1.14.2
+ENV NGINX_VERSION 1.16.1-0+xenial1
+ENV NGINX_SRC_VERSION 1.16.1
 ENV UPLOAD_VERSION 2.3.0
 
 COPY nginx.upload.conf /opt/upload.conf
@@ -43,16 +43,15 @@ RUN echo ">>>>>>>> 1. Installing prerequsitions <<<<<<<<" \
     && echo ">>>>>>>> 5. Clean up <<<<<<<<" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache \
     && rm -rf /opt/rebuildnginx \
-    && rm -rf /opt/httpUpload
+    && rm -rf /opt/httpUpload \
+    && rm -rf /usr/lib/x86_64-linux-gnu \
+    && rm -rf /usr/lib/gcc \
+
 
 VOLUME /opt/upload /opt/res /opt/script/extra /etc/nginx/conf.d/extra /var/log/nginx
 
-EXPOSE 8070
+EXPOSE 80
 
 ENTRYPOINT service nginx start && /opt/script/init_upload_dir.sh && tail -f /var/log/nginx/error.log
-
-# https://gorails.com/blog/how-to-compile-dynamic-nginx-modules
-# http://www.grid.net.ru/nginx/upload.en.html
-# https://launchpad.net/~nginx/+archive/ubuntu/stable
-# https://github.com/openresty/lua-nginx-module#nginx-api-for-lua
