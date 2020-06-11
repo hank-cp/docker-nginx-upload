@@ -2,8 +2,8 @@ FROM ubuntu:xenial
 
 LABEL maintainer="true.cp@gmail.com" tag="nginx-upload"
 
-ENV NGINX_VERSION 1.14.2-0+xenial1
-ENV NGINX_SRC_VERSION 1.14.2
+ENV NGINX_VERSION 1.16.1-0+xenial1
+ENV NGINX_SRC_VERSION 1.16.1
 ENV UPLOAD_VERSION 2.3.0
 
 COPY nginx.upload.conf /opt/upload.conf
@@ -13,7 +13,7 @@ COPY init_upload_dir.sh /opt/script/init_upload_dir.sh
 
 RUN echo ">>>>>>>> 1. Installing prerequsitions <<<<<<<<" \
     && apt-get update \
-    && apt-get install -y curl software-properties-common libpcre3 libpcre3-dev libssl-dev \
+    && apt-get install -y curl software-properties-common libpcre3 libpcre3-dev libssl-dev libgeoip1 \
 #    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php \
     && add-apt-repository -y ppa:nginx/stable \
     && apt-get update \
@@ -46,8 +46,6 @@ RUN echo ">>>>>>>> 1. Installing prerequsitions <<<<<<<<" \
     && rm -rf /var/cache \
     && rm -rf /opt/rebuildnginx \
     && rm -rf /opt/httpUpload \
-    && rm -rf /usr/lib/x86_64-linux-gnu \
-    && rm -rf /usr/lib/gcc \
 
 
 VOLUME /opt/upload /opt/res /opt/script/extra /etc/nginx/conf.d/extra /var/log/nginx
